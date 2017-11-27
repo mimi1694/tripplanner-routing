@@ -45,6 +45,21 @@ const makeOption = (attraction, selector) => {
   select.add(option);
 };
 
+
+
+api.fetchItineraries()
+  .then(itineraries=>{
+    console.log(itineraries);
+      itineraries.hotels.forEach(hotel => {
+        buildAttractionAssets("hotels", hotel)
+      }),
+      itineraries.restaurants.forEach(restaurant => {
+        buildAttractionAssets("restaurants", restaurant)
+      }),
+      itineraries.activities.forEach(activity => {
+        buildAttractionAssets("activities", activity)
+      })
+});
 /*
   * Attach Event Listeners
   */
@@ -116,3 +131,5 @@ const buildAttractionAssets = (category, attraction) => {
     map.flyTo({ center: fullstackCoords, zoom: 12.3 });
   });
 };
+
+module.exports = buildAttractionAssets;

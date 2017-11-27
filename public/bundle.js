@@ -581,6 +581,21 @@ const makeOption = (attraction, selector) => {
   select.add(option);
 };
 
+
+
+api.fetchItineraries()
+  .then(itineraries=>{
+    console.log(itineraries);
+      itineraries.hotels.forEach(hotel => {
+        buildAttractionAssets("hotels", hotel)
+      }),
+      itineraries.restaurants.forEach(restaurant => {
+        buildAttractionAssets("restaurants", restaurant)
+      }),
+      itineraries.activities.forEach(activity => {
+        buildAttractionAssets("activities", activity)
+      })
+});
 /*
   * Attach Event Listeners
   */
@@ -653,6 +668,7 @@ const buildAttractionAssets = (category, attraction) => {
   });
 };
 
+module.exports = buildAttractionAssets;
 
 /***/ }),
 /* 2 */
@@ -690,8 +706,15 @@ const fetchAttractions = () =>
     .then(result => result.json())
     .catch(err => console.error(err));
 
+const fetchItineraries = () =>
+  fetch("/api/itineraries/1")//WHAT VARIABLE
+    .then(result => result.json())
+    .catch(err => console.error(err));
+
+
 module.exports = {
-  fetchAttractions
+  fetchAttractions,
+  fetchItineraries
 };
 
 
